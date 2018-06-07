@@ -1,4 +1,10 @@
-FROM node:4
+FROM node:8
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install
+RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
+
+COPY . .
+
+
 EXPOSE 8080
-COPY app.js .
 CMD node app.js
