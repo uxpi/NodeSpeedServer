@@ -1,6 +1,6 @@
-var config = require('./config');
 var express = require('express');
 var busboy = require('connect-busboy');
+var config = require('./config');
 
 var app = express();
 app.use(express.static('public'));
@@ -9,10 +9,7 @@ app.enable('trust proxy');
 
 var gcloud = require('google-cloud');
 
-var storage = gcloud.storage({
-    projectId: config.projectId,
-    keyFilename: config.keyFilename
-});
+var storage = gcloud.storage();
 
 var bucket = storage.bucket(config.bucketName);
 

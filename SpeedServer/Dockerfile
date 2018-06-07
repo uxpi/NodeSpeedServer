@@ -1,10 +1,12 @@
-FROM node:8
-ADD package.json /tmp/package.json
-RUN cd /tmp && npm install
-RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
+FROM node:carbon
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
 
 COPY . .
 
-
 EXPOSE 8080
-CMD node app.js
+CMD [ "npm", "start" ]
