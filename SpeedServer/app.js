@@ -1,14 +1,11 @@
 var express = require('express');
-var busboy = require('connect-busboy');
 var config = require('./config');
 var gcloud = require('google-cloud');
-var path = require('path');
 var formidable = require('formidable');
 var fs = require('fs');
 
 var app = express();
 app.use(express.static('public'));
-app.use(busboy());
 app.enable('trust proxy');
 
 var storage = gcloud.storage();
@@ -18,7 +15,7 @@ var bucket = storage.bucket(config.bucketName);
 var remoteFile = bucket.file('file_200_MB.bin');
 
 app.get('/', function(req, res) {
-  res.send('Testing test...');
+  res.send('Speed Server: Up and running');
 });
 
 app.get('/download', function(req, res) {
